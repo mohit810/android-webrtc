@@ -1,25 +1,19 @@
 package com.example.webrtcapp.activities
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.TextUtils
-import android.webkit.PermissionRequest
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.webrtcapp.R
+import com.example.webrtcapp.helpers.Constants.permissions
+import com.example.webrtcapp.helpers.Constants.requestcode
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : Activity() {
-
-    private val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
-    private val requestcode = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

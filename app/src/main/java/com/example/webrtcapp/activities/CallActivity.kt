@@ -7,12 +7,13 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.example.webrtcapp.R
+import com.example.webrtcapp.helpers.JavascriptInterface
 import kotlinx.android.synthetic.main.activity_call.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 class CallActivity : AppCompatActivity() {
 
     var uid: String? = null
+    var isPeerConnected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +32,9 @@ class CallActivity : AppCompatActivity() {
             }
         }
 
-        webView.settings.javaScriptEnabled = true
+        webView.settings.javaScriptEnabled = true  //this is a dangerous as this can introduce XSS vulnerabilities into your application
         webView.settings.mediaPlaybackRequiresUserGesture = false
-        //webView.addJavascriptInterface(JavascriptInterface(this), "Android")
+        webView.addJavascriptInterface(JavascriptInterface(this), "Android")
 
         loadVideoCall()
     }
@@ -51,12 +52,16 @@ class CallActivity : AppCompatActivity() {
 
     private fun initializePeer() {
 
-        callJavascriptFunction("javascript:init()")
+        callJavascriptFunction("javascript:init(\"${uid}\")")
 
     }
 
     private fun callJavascriptFunction(functionString: String) {
         webView.post { webView.evaluateJavascript(functionString, null) }
+    }
+
+    fun onPeerConnected() {
+        isPeerConnected = true
     }
 
 }
