@@ -2,6 +2,8 @@ let localVideo = document.getElementById("local-video")
 
 let streamKey, encryptedSdp, remoteSessionDescription
 
+let pc = new RTCPeerConnection()
+
 const hdConstraints = {
     audio: true,
     video: {
@@ -34,8 +36,7 @@ function postRequest() {
 function init(uid) {
 
     streamKey = uid
-    let pc = new RTCPeerConnection()
-    pc.oniceconnectionstatechange = e => log(pc.iceConnectionState)
+    pc.oniceconnectionstatechange = e => console.log(pc.iceConnectionState)
     pc.onicecandidate = event => {
         if (event.candidate === null) {
             encryptedSdp = btoa(JSON.stringify(pc.localDescription))
