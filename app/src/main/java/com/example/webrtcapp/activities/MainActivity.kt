@@ -26,7 +26,7 @@ class MainActivity : Activity() {
         button.setOnClickListener {
             if (isPermissionGranted() && !TextUtils.isEmpty(editTextUnique.text)) {
                 val intent = Intent(this, CallActivity::class.java)
-                intent.putExtra("uid", editTextUnique.text)
+                intent.putExtra("uid", editTextUnique.text.toString())
                 startActivity(intent)
             } else if (!isPermissionGranted()) {
                 askPermissions()

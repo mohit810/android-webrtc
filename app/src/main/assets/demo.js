@@ -16,7 +16,7 @@ function postRequest() {
         "streamKey": streamKey
     })
     console.log(data);
-    const url = "http://www.website.com:8080/sdp";
+    const url = "http://IP_Address/sdp";
     (async () => {
         const rawResponse = await fetch(url, {
             method: "POST",
