@@ -21,7 +21,14 @@ class CallActivity : AppCompatActivity() {
 
         uid = intent.getStringExtra("uid")
         setupWebView()
+        initViews()
 
+    }
+
+    private fun initViews() {
+        end_live_stream_btn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setupWebView() {
